@@ -17,13 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout PR
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         ref: ${{github.event.pull_request.head.ref}}
         repository: ${{github.event.pull_request.head.repo.full_name}}
         path: pr
     - name: Checkout Base
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
       with:
         repository: OWASP/wstg
         path: base
@@ -32,7 +32,7 @@ jobs:
         PR_NUMBER: ${{ github.event.number }}
       run: echo $PR_NUMBER > pr_number
     - name: Setup Node
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '20'
     - name: Install dependencies
@@ -67,7 +67,7 @@ jobs:
         cat mistakes.txt | tee -a artifact.txt
     - name: Upload list of mistakes
       if: failure()
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: artifact
         path: |
